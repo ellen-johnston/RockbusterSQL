@@ -1,0 +1,14 @@
+--This will return the 10 movies with the highest revenue
+SELECT
+	A.title,
+	A.film_id,
+	SUM(D.amount) AS film_revenue
+FROM film A
+INNER JOIN inventory B ON A.film_id = B.film_id
+INNER JOIN rental C ON B.inventory_id = C.inventory_id
+INNER JOIN payment D ON C.rental_id = D.rental_id
+GROUP BY 
+	A.title,
+	A.film_id
+ORDER BY film_revenue DESC
+LIMIT 10;
